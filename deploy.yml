@@ -19,7 +19,7 @@ spec:
         app: demosebr
     spec:
       containers:
-        image: CONTAINER_IMAGE
+      - image: CONTAINER_IMAGE
         imagePullPolicy: Always
         name: demosebr
         ports:
