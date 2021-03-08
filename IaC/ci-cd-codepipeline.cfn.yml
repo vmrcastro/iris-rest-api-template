@@ -18,7 +18,7 @@ Parameters:
   GitSourceRepo:
     Type: String
     Description: GitHub source repository - must contain a Dockerfile and buildspec.yml in the base
-    Default: eks-workshop-sample-api-service-go
+    Default: iris-rest-api-template
     MinLength: 1
     MaxLength: 100
     ConstraintDescription: You must enter a GitHub repository name
