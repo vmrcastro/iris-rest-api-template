@@ -108,10 +108,6 @@ Resources:
     Type: AWS::ECR::Repository
     DeletionPolicy: Retain
 
-  CodePipelineArtifactBucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
-
   CodePipelineServiceRole:
     Type: AWS::IAM::Role
     Properties:
@@ -139,14 +135,6 @@ Resources:
                   - codecommit:GetUploadArchiveStatus
                   - codecommit:CancelUploadArchive
                   - iam:PassRole
-              - Resource: !Sub arn:aws:s3:::${CodePipelineArtifactBucket}/*
-                Effect: Allow
-                Action:
-                  - s3:PutObject
-                  - s3:GetObject
-                  - s3:GetObjectVersion
-                  - s3:GetBucketVersioning
-    DependsOn: CodePipelineArtifactBucket
 
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
@@ -193,12 +181,6 @@ Resources:
                   - ec2:DescribeSecurityGroups
                   - ec2:DescribeVpcs
                   - ec2:CreateNetworkInterfacePermission
-              - Resource: !Sub arn:aws:s3:::${CodePipelineArtifactBucket}/*
-                Effect: Allow
-                Action:
-                  - s3:GetObject
-                  - s3:PutObject
-                  - s3:GetObjectVersion
               - Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/${EcrDockerRepository}
                 Effect: Allow
                 Action:
@@ -239,9 +221,6 @@ Resources:
     Type: AWS::CodePipeline::Pipeline
     Properties:
       RoleArn: !GetAtt CodePipelineServiceRole.Arn
-      ArtifactStore:
-        Type: S3
-        Location: !Ref CodePipelineArtifactBucket
       Stages:
         - Name: Source
           Actions:
