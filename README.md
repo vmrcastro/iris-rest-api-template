@@ -2,39 +2,13 @@
 This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
 It also has OPEN API spec, 
 can be developed with Docker and VSCode,
-can ve deployed as ZPM module.
-
-## Prerequisites
-Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
-
-## Installation with ZPM
-
-zpm:USER>install rest-api-template
-
-## Installation for development
-
-Create your repository from template.
-
-Clone/git pull the repo into any local directory e.g. like it is shown below (here I show all the examples related to this repository, but I assume you have your own derived from the template):
-
-```
-$ git clone git@github.com:intersystems-community/objectscript-rest-docker-template.git
-```
-
-Open the terminal in this directory and run:
-
-```
-$ docker-compose up -d --build
-```
-
-or open the folder in VSCode and do the following:
-![rest](https://user-images.githubusercontent.com/2781759/78183327-63569800-7470-11ea-8561-c3b547ce9001.gif)
-
+can be deployed as ZPM module.
+In this particular repository, there are also some files to create a CI/CD pipeline in AWS using Code Pipeline and Code Build and EKS.
 
 ## How to Work With it
 
 This template creates /crud REST web-application on IRIS which implements 4 types of communication: GET, POST, PUT and DELETE aka CRUD operations.
-These interface works with a sample persistent class Sample.Person.
+These interface works with a sample persistent class dc.Sample.Person.
 
 Open http://localhost:52773/swagger-ui/index.html to test the REST API
 
@@ -117,17 +91,3 @@ Feel free to delete PackageSample folder and place your ObjectScript classes in 
 /src/cls/Package/Classname.cls
 
 The script in Installer.cls will import everything you place under /src/cls into IRIS.
-
-## What's insde the repo
-
-# Dockerfile
-
-The simplest dockerfile to start IRIS and load ObjectScript from /src/cls folder
-Use the related docker-compose.yml to easily setup additional parametes like port number and where you map keys and host folders.
-
-# .vscode/settings.json
-
-Settings file to let you immedietly code in VSCode with [VSCode ObjectScript plugin](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript))
-
-# .vscode/launch.json
-Config file if you want to debug with VSCode ObjectScript
